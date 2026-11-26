@@ -1,0 +1,145 @@
+/* Identidade visual do Ecossistema VS */
+:root {
+  --preto: #0a0a0a;
+  --amarelo: #e7bc21;
+  --amarelo-escuro: #c99f0f;
+  --claro: #f5f3ee;
+  --branco: #ffffff;
+
+  /* cinzas quentes */
+  --cinza-900: #1f1e1b;
+  --cinza-800: #2e2c28;
+  --cinza-700: #5c5852;
+  --cinza-400: #a29d93;
+  --cinza-200: #dcd8cf;
+  --cinza-100: #ebe8e1;
+
+  --erro: #a3271b;
+  --erro-fundo: #f8e6e3;
+  --sucesso: #2f6b3a;
+
+  --raio-cartao: 4px;
+  --fonte: "Red Hat Display Variable", "Red Hat Display", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fonte);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--preto);
+  background: var(--claro);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+}
+
+input,
+select,
+textarea,
+button {
+  font: inherit;
+}
+
+input[type="email"],
+input[type="text"],
+input[type="tel"],
+select,
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--cinza-400);
+  border-radius: 0;
+  background: var(--branco);
+  color: var(--preto);
+  font-size: 1rem; /* 16px evita zoom automático no iPhone */
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--amarelo);
+  outline-offset: 2px;
+}
+
+/* Botões: cantos retos */
+.botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 12px 20px;
+  border: 2px solid var(--preto);
+  border-radius: 0;
+  background: transparent;
+  color: var(--preto);
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.botao:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.botao-primario {
+  background: var(--amarelo);
+  border-color: var(--amarelo);
+}
+
+.botao-primario:hover:not(:disabled) {
+  background: var(--amarelo-escuro);
+  border-color: var(--amarelo-escuro);
+}
+
+.cartao {
+  background: var(--branco);
+  border: 1px solid var(--cinza-200);
+  border-radius: var(--raio-cartao);
+  padding: 20px;
+}
+
+.etiqueta {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--raio-cartao);
+  background: var(--preto);
+  color: var(--amarelo);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.visualmente-oculto {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
