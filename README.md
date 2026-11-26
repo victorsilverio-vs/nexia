@@ -43,11 +43,14 @@ Os testes de banco (`tests/db`) rodam as migrações num Postgres em memória (P
 3. **Authentication → URL Configuration:**
    - *Site URL*: o endereço de produção (ex.: `https://nexia.ecossistemavs.com.br`, ou o `*.vercel.app` enquanto o domínio não estiver pronto).
    - *Redirect URLs*: o mesmo endereço com `/**` no fim, e `http://localhost:3000/**`.
-4. **Authentication → Emails → Magic Link:** assunto `Seu link de acesso à NEXIA` e corpo copiado de [`supabase/templates/link-magico.html`](supabase/templates/link-magico.html).
-   Esse modelo faz o link funcionar mesmo se o membro pedir no computador e abrir no celular.
-5. **Authentication → Users → Add user:** criar `contato@ecossistemavs.com.br`. Ele vira admin sozinho.
-6. **E-mail de verdade (recomendado antes dos membros):** o e-mail padrão do Supabase envia poucos por hora.
-   Configurar o Resend em *Authentication → Emails → SMTP Settings* com o domínio `ecossistemavs.com.br` verificado.
+4. **Authentication → Users → Add user:** criar `contato@ecossistemavs.com.br`. Ele vira admin sozinho.
+5. **E-mail próprio (obrigatório antes dos membros):** configurar o Resend em *Authentication → Emails → Set up SMTP*,
+   com o domínio `ecossistemavs.com.br` verificado. Sem isso o Supabase envia poucos e-mails por hora
+   e não deixa editar os modelos.
+6. **Depois do SMTP, Authentication → Emails → Magic link or OTP:** assunto `Seu link de acesso à NEXIA`
+   e corpo (aba *Source*) copiado de [`supabase/templates/link-magico.html`](supabase/templates/link-magico.html).
+   Até isso ser feito, o e-mail chega em inglês e o link só funciona no mesmo navegador em que foi pedido.
+   Com o modelo, funciona em qualquer aparelho.
 
 ### 2. Vercel
 
@@ -63,6 +66,7 @@ Os testes de banco (`tests/db`) rodam as migrações num Postgres em memória (P
 - [ ] Supabase no plano Pro (sem pausa por inatividade, com backup diário).
 - [ ] Vercel no plano Pro (o Hobby não permite uso comercial).
 - [ ] SMTP do Resend configurado no Supabase.
+- [ ] Modelo do link mágico em português colado no Supabase (passo 6 acima).
 - [ ] Domínio `nexia.ecossistemavs.com.br` apontado para a Vercel e cadastrado no Supabase (Site URL e Redirect URLs).
 
 ## Estrutura
