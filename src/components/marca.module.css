@@ -1,0 +1,33 @@
+.marca {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.nome {
+  font-weight: 800;
+  font-size: 1.5rem;
+  letter-spacing: 0.12em;
+  color: var(--preto);
+  border-bottom: 3px solid var(--amarelo);
+  padding-bottom: 4px;
+  align-self: flex-start;
+}
+
+.assinatura {
+  margin-top: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--cinza-700);
+}
+
+.escuro .nome {
+  color: var(--claro);
+}
+
+.escuro .assinatura {
+  color: var(--cinza-400);
+}

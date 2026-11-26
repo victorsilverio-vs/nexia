@@ -1,0 +1,73 @@
+.pagina {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+  background: var(--preto);
+}
+
+.cartao {
+  width: 100%;
+  max-width: 420px;
+  background: var(--claro);
+  border-radius: var(--raio-cartao);
+  border-top: 4px solid var(--amarelo);
+  padding: 32px 24px;
+}
+
+.cartao h1 {
+  margin: 24px 0 8px;
+  font-size: 1.6rem;
+}
+
+.subtitulo {
+  margin: 0 0 24px;
+  color: var(--cinza-700);
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.formulario label {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.formulario button {
+  margin-top: 8px;
+}
+
+.erro {
+  margin: 0 0 8px;
+  padding: 10px 12px;
+  background: var(--erro-fundo);
+  color: var(--erro);
+  border-left: 3px solid var(--erro);
+  font-size: 0.95rem;
+}
+
+.enviado h2 {
+  margin: 0 0 8px;
+  font-size: 1.2rem;
+}
+
+.enviado p {
+  margin: 0 0 12px;
+}
+
+.dica {
+  color: var(--cinza-700);
+  font-size: 0.9rem;
+}
+
+.rodape {
+  margin-top: 24px;
+  color: var(--cinza-400);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
