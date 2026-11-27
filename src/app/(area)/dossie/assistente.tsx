@@ -13,7 +13,7 @@ import {
   type TipoConsentimento,
   type Valores,
 } from "@/lib/dossie/perguntas";
-import { pendencias, progresso, visivel, type ItemLista, type Respostas } from "@/lib/dossie/validacao";
+import { dossieVazio, pendencias, progresso, visivel, type ItemLista, type Respostas } from "@/lib/dossie/validacao";
 import { enviarDossie, registrarConsentimento, salvarSecao } from "./acoes";
 
 type EstadoSalvamento = "ocioso" | "salvando" | "salvo" | "erro";
@@ -33,6 +33,8 @@ export function AssistenteDossie({ membroId, respostasIniciais, consentimentosIn
   const router = useRouter();
   const [respostas, setRespostas] = useState<Respostas>(respostasIniciais);
   const [passo, setPasso] = useState(() => Math.max(0, SECOES.findIndex((s) => s.id === secaoInicial)));
+  // Boas-vindas só para quem ainda não começou (e não chegou por um link direto para uma etapa).
+  const [mostrarBoasVindas, setMostrarBoasVindas] = useState(() => !secaoInicial && dossieVazio(respostasIniciais));
   const [salvamento, setSalvamento] = useState<EstadoSalvamento>("ocioso");
   const [erroSalvar, setErroSalvar] = useState<string | null>(null);
 
@@ -113,6 +115,10 @@ export function AssistenteDossie({ membroId, respostasIniciais, consentimentosIn
   const secao = SECOES[passo];
   const percentual = progresso(respostas);
 
+  if (mostrarBoasVindas) {
+    return <BoasVindas aoComecar={() => setMostrarBoasVindas(false)} />;
+  }
+
   return (
     <div className={estilos.assistente}>
       {devolvido ? (
@@ -187,6 +193,24 @@ export function AssistenteDossie({ membroId, respostasIniciais, consentimentosIn
         ) : null}
       </div>
     </div>
+  );
+}
+
+function BoasVindas({ aoComecar }: { aoComecar: () => void }) {
+  return (
+    <section className={`cartao ${estilos.boasVindas}`}>
+      {/* Futuro: vídeo de boas-vindas do Victor aqui. */}
+      <h1>Olá, tudo bem?</h1>
+      <p>Aqui a gente quer conhecer você: quem você é, onde está hoje, aonde quer chegar e o que você tem em mãos.</p>
+      <p>
+        É um questionário bem detalhado, e é a partir dele que montamos o seu plano de ação. Por isso,{" "}
+        <strong>comece quando tiver mais ou menos meia hora para responder com calma.</strong>
+      </p>
+      <p>Suas respostas ficam salvas automaticamente. Se precisar parar, é só voltar depois e continuar de onde parou.</p>
+      <button type="button" className="botao botao-primario" onClick={aoComecar}>
+        Começar
+      </button>
+    </section>
   );
 }
 

@@ -11,8 +11,10 @@ export async function origemDoSite(): Promise<string> {
   return `${protocolo}://${host}`;
 }
 
-/** Link externo de agendamento da reunião com o Victor (Google Agenda, Calendly...). */
+const AGENDAMENTO_PADRAO = "https://calendly.com/victor-silverio/reuniao-de-negocios-clone";
+
+/** Link externo de agendamento da reunião com o Victor. A variável LINK_AGENDAMENTO substitui o padrão. */
 export function linkAgendamento(): string | null {
-  const url = process.env.LINK_AGENDAMENTO?.trim();
-  return url && /^https:\/\//.test(url) ? url : null;
+  const url = process.env.LINK_AGENDAMENTO?.trim() || AGENDAMENTO_PADRAO;
+  return /^https:\/\//.test(url) ? url : null;
 }

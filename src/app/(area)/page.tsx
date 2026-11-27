@@ -50,7 +50,7 @@ export default async function Inicio({ searchParams }: { searchParams: Promise<{
               </>
             ) : (
               <>
-                <p>É por ele que começamos: você, seu momento e seus empreendimentos. Leva uns 20 minutos e dá para fazer aos poucos.</p>
+                <p>É por ele que começamos: você, seu momento e seus empreendimentos. Reserve uns 30 minutos; dá para fazer aos poucos.</p>
                 <Link href="/dossie" className="botao botao-primario">
                   Começar dossiê
                 </Link>

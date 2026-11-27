@@ -353,3 +353,26 @@
   margin: 32px 0 16px;
   font-size: 1.2rem;
 }
+
+/* Boas-vindas ------------------------------------------------------------- */
+
+.boasVindas {
+  max-width: 640px;
+  margin: 0 auto;
+  border-top: 3px solid var(--amarelo);
+  padding: 28px 20px;
+}
+
+.boasVindas h1 {
+  margin: 0 0 16px;
+  font-size: 1.6rem;
+}
+
+.boasVindas p {
+  margin: 0 0 14px;
+  line-height: 1.6;
+}
+
+.boasVindas button {
+  margin-top: 8px;
+}

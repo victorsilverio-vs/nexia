@@ -12,7 +12,7 @@ Regras do projeto em [`CLAUDE.md`](CLAUDE.md); escopo da primeira entrega em [`d
 - Dossiê completo: 7 etapas, uma por tela, barra de progresso, salvamento automático, perguntas que aparecem conforme as respostas, vários empreendimentos com fotos e documentos.
 - As perguntas ficam em `src/lib/dossie/perguntas.ts`. Para mudar o questionário, edite só essa lista.
 - Envio exige o aceite de LGPD e trava o dossiê. Admin e equipe podem devolver para correção.
-- Depois do envio, o membro vê o link de agendamento da reunião com o Victor (`LINK_AGENDAMENTO`).
+- Depois do envio, o membro vê o link de agendamento da reunião com o Victor (Calendly, em `src/lib/site.ts`; a variável `LINK_AGENDAMENTO` substitui).
 - A equipe vê a lista de membros com a situação do dossiê, abre cada um, baixa os anexos, edita o cadastro e reenvia o convite. Só o admin muda papéis (por exemplo, promover alguém a equipe).
 - Consentimentos guardados como histórico com data; registro de e-mails enviados sem dados pessoais.
 - Página `/privacidade` com um **rascunho** de política, que precisa de revisão jurídica.
@@ -65,7 +65,6 @@ Os testes de banco (`tests/db`) rodam as migrações num Postgres em memória (P
    - `NEXT_PUBLIC_SUPABASE_URL`: Supabase → Project Settings → API → Project URL.
    - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`: Supabase → Project Settings → API Keys → *Publishable key* (`sb_publishable_...`).
    - `SUPABASE_SECRET_KEY`: Supabase → Project Settings → API Keys → *Secret keys* (`sb_secret_...`). Marque como *Sensitive*.
-   - `LINK_AGENDAMENTO`: a página de agendamento da reunião inicial.
    - `RESEND_API_KEY` e `EMAIL_REMETENTE`: quando o domínio estiver verificado no Resend.
    - `NEXT_PUBLIC_SITE_URL` (opcional): o endereço de produção.
 3. Deploy. Produção sai do branch `main`.
