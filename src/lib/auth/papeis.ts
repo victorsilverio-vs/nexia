@@ -27,7 +27,7 @@ export function ehPapel(valor: unknown): valor is Papel {
 }
 
 /** Rotas abertas, sem login. */
-const ROTAS_PUBLICAS = ["/entrar", "/auth"];
+const ROTAS_PUBLICAS = ["/entrar", "/auth", "/privacidade"];
 
 /** Áreas restritas, do prefixo mais específico ao mais geral. */
 const AREAS_RESTRITAS: { prefixo: string; papeis: readonly Papel[] }[] = [
@@ -68,15 +68,18 @@ export function podeAlterarPapel(papel: Papel): boolean {
 
 export type ItemMenu = { href: string; rotulo: string };
 
-const MENU: ItemMenu[] = [
+const MENU: (ItemMenu & { soPara?: readonly Papel[] })[] = [
   { href: "/", rotulo: "Início" },
+  { href: "/dossie", rotulo: "Dossiê", soPara: ["membro"] },
   { href: "/equipe", rotulo: "Membros" },
   { href: "/mesa", rotulo: "Mesa do Victor" },
 ];
 
 /** Itens de menu que o papel enxerga. */
 export function menuPara(papel: Papel): ItemMenu[] {
-  return MENU.filter((item) => podeAcessarRota(papel, item.href));
+  return MENU.filter((item) => podeAcessarRota(papel, item.href) && (!item.soPara || item.soPara.includes(papel))).map(
+    ({ href, rotulo }) => ({ href, rotulo }),
+  );
 }
 
 /**

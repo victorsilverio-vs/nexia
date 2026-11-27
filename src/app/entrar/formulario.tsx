@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { enviarLinkMagico, type EstadoEntrar } from "./acoes";
 import estilos from "./entrar.module.css";
 
-export function FormularioEntrar({ proximo }: { proximo?: string }) {
+export function FormularioEntrar({ proximo, emailInicial }: { proximo?: string; emailInicial?: string }) {
   const [estado, acao, enviando] = useActionState<EstadoEntrar, FormData>(enviarLinkMagico, { tipo: "inicial" });
 
   if (estado.tipo === "enviado") {
@@ -13,7 +13,7 @@ export function FormularioEntrar({ proximo }: { proximo?: string }) {
         <h2>Confira seu e-mail</h2>
         <p>
           Se <strong>{estado.email}</strong> estiver cadastrado na NEXIA, você vai receber um link de acesso em
-          instantes. Abra o link neste aparelho ou em qualquer outro.
+          instantes. Abra o link neste mesmo aparelho e navegador.
         </p>
         <p className={estilos.dica}>Não chegou? Olhe a caixa de spam ou promoções. O link vale por 1 hora.</p>
       </div>
@@ -31,6 +31,7 @@ export function FormularioEntrar({ proximo }: { proximo?: string }) {
         autoComplete="email"
         required
         placeholder="voce@empresa.com.br"
+        defaultValue={emailInicial}
         aria-invalid={estado.tipo === "erro"}
         aria-describedby={estado.tipo === "erro" ? "erro-entrar" : undefined}
       />

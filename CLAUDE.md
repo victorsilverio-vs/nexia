@@ -17,8 +17,8 @@ A especificação da primeira entrega está em `docs/SPEC-MVP-1.md`. Leia antes 
 
 - Next.js (App Router) + TypeScript, interface em português do Brasil.
 - Supabase: Postgres, Auth (login por link mágico no e-mail), Storage (anexos e documentos), Row Level Security. Região São Paulo.
-- Hospedagem: Vercel. Domínio previsto: nexia.ecossistemavs.com.br.
-- E-mail transacional: Resend.
+- Hospedagem: Vercel. Domínio da plataforma: app.nexiavs.com.br (o domínio principal nexiavs.com.br é o site de divulgação). DNS no Registro.br.
+- E-mail transacional: Resend, enviando de app.nexiavs.com.br.
 - IA: API da Anthropic, chamada só no servidor.
 - Cobrança (fase seguinte): Asaas.
 
