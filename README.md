@@ -3,13 +3,19 @@
 Plataforma de assessoria em desenvolvimento imobiliário do Ecossistema VS.
 Regras do projeto em [`CLAUDE.md`](CLAUDE.md); escopo da primeira entrega em [`docs/SPEC-MVP-1.md`](docs/SPEC-MVP-1.md).
 
-## O que já existe (marco 1)
+## O que já existe
 
-- Next.js 16 (App Router) + TypeScript, interface em português.
-- Login sem senha por link mágico (Supabase Auth). Só entra quem foi cadastrado; não há cadastro aberto.
-- Perfis e papéis (`admin`, `equipe`, `membro`) com Row Level Security e testes.
-- Layout na identidade VS (preto, amarelo, claro, Red Hat Display), pensado primeiro para o celular.
-- Telas: entrar, início por papel, Membros (admin e equipe) e Mesa do Victor (só admin), ainda vazias.
+**Marco 1:** login sem senha por link mágico (só entra quem foi cadastrado), perfis e papéis (`admin`, `equipe`, `membro`) com RLS, layout na identidade VS pensado primeiro para o celular.
+
+**Marco 2:**
+- A equipe cadastra membros (nome, e-mail, WhatsApp, plano) e o convite sai por e-mail. Sem e-mail configurado, a tela mostra o link para mandar pelo WhatsApp.
+- Dossiê completo: 7 etapas, uma por tela, barra de progresso, salvamento automático, perguntas que aparecem conforme as respostas, vários empreendimentos com fotos e documentos.
+- As perguntas ficam em `src/lib/dossie/perguntas.ts`. Para mudar o questionário, edite só essa lista.
+- Envio exige o aceite de LGPD e trava o dossiê. Admin e equipe podem devolver para correção.
+- Depois do envio, o membro vê o link de agendamento da reunião com o Victor (Calendly, em `src/lib/site.ts`; a variável `LINK_AGENDAMENTO` substitui).
+- A equipe vê a lista de membros com a situação do dossiê, abre cada um, baixa os anexos, edita o cadastro e reenvia o convite. Só o admin muda papéis (por exemplo, promover alguém a equipe).
+- Consentimentos guardados como histórico com data; registro de e-mails enviados sem dados pessoais.
+- Página `/privacidade` com um **rascunho** de política, que precisa de revisão jurídica.
 
 ## Rodar na sua máquina
 
@@ -37,8 +43,8 @@ Os testes de banco (`tests/db`) rodam as migrações num Postgres em memória (P
 
 ### 1. Supabase (projeto `nexia`, região São Paulo)
 
-1. **Aplicar as migrações.** Na sua máquina: `npx supabase login`, `npx supabase link --project-ref <ref-do-projeto>` e `npx supabase db push`.
-   Alternativa sem terminal: copiar o conteúdo de `supabase/migrations/*.sql`, em ordem, no SQL Editor do painel.
+1. **Aplicar as migrações**, uma de cada vez e em ordem, colando o conteúdo de cada arquivo de `supabase/migrations/` no SQL Editor do painel e clicando em Run.
+   Cada arquivo roda uma vez só. Já aplicadas: `20261126120000_perfis_e_papeis.sql`.
 2. **Authentication → Sign In / Providers:** desligar *Allow new users to sign up*. Manter *Email* ligado.
 3. **Authentication → URL Configuration:**
    - *Site URL*: o endereço de produção (ex.: `https://nexia.ecossistemavs.com.br`, ou o `*.vercel.app` enquanto o domínio não estiver pronto).
@@ -58,6 +64,8 @@ Os testes de banco (`tests/db`) rodam as migrações num Postgres em memória (P
 2. Em *Environment Variables*, cadastrar:
    - `NEXT_PUBLIC_SUPABASE_URL`: Supabase → Project Settings → API → Project URL.
    - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`: Supabase → Project Settings → API Keys → *Publishable key* (`sb_publishable_...`).
+   - `SUPABASE_SECRET_KEY`: Supabase → Project Settings → API Keys → *Secret keys* (`sb_secret_...`). Marque como *Sensitive*.
+   - `RESEND_API_KEY` e `EMAIL_REMETENTE`: quando o domínio estiver verificado no Resend.
    - `NEXT_PUBLIC_SITE_URL` (opcional): o endereço de produção.
 3. Deploy. Produção sai do branch `main`.
 
@@ -67,7 +75,9 @@ Os testes de banco (`tests/db`) rodam as migrações num Postgres em memória (P
 - [ ] Vercel no plano Pro (o Hobby não permite uso comercial).
 - [ ] SMTP do Resend configurado no Supabase.
 - [ ] Modelo do link mágico em português colado no Supabase (passo 6 acima).
-- [ ] Domínio `nexia.ecossistemavs.com.br` apontado para a Vercel e cadastrado no Supabase (Site URL e Redirect URLs).
+- [ ] Domínio `app.nexiavs.com.br` apontado para a Vercel e cadastrado no Supabase (Site URL e Redirect URLs).
+- [ ] Política de privacidade (`/privacidade`) revisada por advogado.
+- [ ] Endereço das prévias da Vercel nas Redirect URLs do Supabase, para o login funcionar nelas.
 
 ## Estrutura
 

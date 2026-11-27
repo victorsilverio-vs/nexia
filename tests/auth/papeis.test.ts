@@ -39,6 +39,7 @@ describe("acesso a rotas por papel", () => {
   it("login e callback são públicos", () => {
     expect(rotaPublica("/entrar")).toBe(true);
     expect(rotaPublica("/auth/confirmar")).toBe(true);
+    expect(rotaPublica("/privacidade")).toBe(true);
     expect(rotaPublica("/")).toBe(false);
     expect(rotaPublica("/entrarx")).toBe(false);
   });
@@ -63,7 +64,7 @@ describe("ações por papel", () => {
 
 describe("menu", () => {
   it("cada papel vê só o que pode abrir", () => {
-    expect(menuPara("membro").map((i) => i.href)).toEqual(["/"]);
+    expect(menuPara("membro").map((i) => i.href)).toEqual(["/", "/dossie"]);
     expect(menuPara("equipe").map((i) => i.href)).toEqual(["/", "/equipe"]);
     expect(menuPara("admin").map((i) => i.href)).toEqual(["/", "/equipe", "/mesa"]);
   });

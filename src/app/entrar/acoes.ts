@@ -1,9 +1,9 @@
 "use server";
 
-import { headers } from "next/headers";
 import { destinoSeguro } from "@/lib/auth/papeis";
 import { supabaseConfigurado } from "@/lib/supabase/config";
 import { criarClienteServidor } from "@/lib/supabase/servidor";
+import { origemDoSite } from "@/lib/site";
 
 export type EstadoEntrar =
   | { tipo: "inicial" }
@@ -11,15 +11,6 @@ export type EstadoEntrar =
   | { tipo: "erro"; mensagem: string };
 
 const EMAIL_VALIDO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-async function origemDoSite(): Promise<string> {
-  const configurada = process.env.NEXT_PUBLIC_SITE_URL;
-  if (configurada) return configurada.replace(/\/$/, "");
-  const h = await headers();
-  const host = h.get("x-forwarded-host") ?? h.get("host") ?? "localhost:3000";
-  const protocolo = h.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
-  return `${protocolo}://${host}`;
-}
 
 export async function enviarLinkMagico(_anterior: EstadoEntrar, formData: FormData): Promise<EstadoEntrar> {
   const email = String(formData.get("email") ?? "")

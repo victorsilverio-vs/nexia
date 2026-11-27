@@ -1,0 +1,26 @@
+.pagina {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 16px 64px;
+}
+
+.texto h1 {
+  margin: 32px 0 4px;
+  font-size: 1.75rem;
+}
+
+.texto h2 {
+  margin: 28px 0 8px;
+  font-size: 1.15rem;
+}
+
+.texto p,
+.texto li {
+  color: var(--cinza-800);
+}
+
+.versao {
+  margin: 0;
+  color: var(--cinza-700);
+  font-size: 0.9rem;
+}

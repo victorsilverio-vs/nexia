@@ -13,9 +13,9 @@ const MENSAGENS_ERRO: Record<string, string> = {
 export default async function PaginaEntrar({
   searchParams,
 }: {
-  searchParams: Promise<{ proximo?: string; erro?: string }>;
+  searchParams: Promise<{ proximo?: string; erro?: string; email?: string }>;
 }) {
-  const { proximo, erro } = await searchParams;
+  const { proximo, erro, email } = await searchParams;
   const destino = destinoSeguro(proximo);
 
   return (
@@ -31,7 +31,7 @@ export default async function PaginaEntrar({
             {MENSAGENS_ERRO[erro]}
           </p>
         ) : null}
-        <FormularioEntrar proximo={destino !== "/" ? destino : undefined} />
+        <FormularioEntrar proximo={destino !== "/" ? destino : undefined} emailInicial={email?.slice(0, 200)} />
       </section>
       <p className={estilos.rodape}>NEXIA · Ecossistema VS</p>
     </main>
